@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #edc157;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.AddVacationView">
+    <Text fill="WHITE" layoutX="206.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Vacation" textAlignment="CENTER" wrappingWidth="239.7294921875">
+        <font>
+            <Font size="30.0" />
+        </font>
+    </Text>
+    <Text fill="WHITE" layoutX="14.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AirLine Company" wrappingWidth="162.7294921875">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Text>
+    <Text fill="WHITE" layoutX="14.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="StartDate" wrappingWidth="162.7294921875">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Text>
+    <Text fill="WHITE" layoutX="360.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticket Type" wrappingWidth="201.92951571941376">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Text>
+    <Text fill="WHITE" layoutX="363.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter accommodation Name" wrappingWidth="208.52948017418385">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Text>
+    <TextField fx:id="AirLineCompany" layoutX="14.0" layoutY="74.0" prefHeight="21.0" prefWidth="218.0" style="-fx-background-color: #d6a900;" />
+    <Button layoutX="400.0" layoutY="342.0" mnemonicParsing="false" onAction="#CreateVacation" prefHeight="39.0" prefWidth="121.0" style="-fx-background-color: #d6a900;" text="Create" textAlignment="CENTER" textFill="WHITE">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Button>
+    <Button layoutX="186.0" layoutY="344.0" mnemonicParsing="false" onAction="#back" prefHeight="39.0" prefWidth="121.0" style="-fx-background-color: #d6a900;" text="Back" textAlignment="CENTER" textFill="WHITE">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Button>
+    <DatePicker fx:id="StartDate" layoutX="14.0" layoutY="126.0" prefHeight="20.0" prefWidth="226.0" stylesheets="dateColor.css" />
+
+   <Text fill="WHITE" layoutX="14.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EndDate" wrappingWidth="162.7294921875">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <DatePicker fx:id="EndDate" layoutX="14.0" layoutY="187.0" prefHeight="20.0" prefWidth="226.0" stylesheets="dateColor.css" />
+   <Text fill="WHITE" layoutX="14.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticket Numbers" wrappingWidth="162.7294921875">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <TextField fx:id="TicketNumbers" layoutX="16.0" layoutY="251.0" prefHeight="26.0" prefWidth="96.0" style="-fx-background-color: #d6a900;" />
+   <CheckBox fx:id="IsIncludeAccommodation" layoutX="364.0" layoutY="165.0" mnemonicParsing="false" text="Includes accommodation?" />
+   <TextField fx:id="AccommodationName" layoutX="360.0" layoutY="219.0" prefHeight="10.0" prefWidth="225.0" style="-fx-background-color: #d6a900;" />
+   <Text fill="WHITE" layoutX="14.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country Name" wrappingWidth="162.7294921875">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <TextField fx:id="CountryName" layoutX="10.0" layoutY="305.0" prefHeight="10.0" prefWidth="225.0" style="-fx-background-color: #d6a900;" />
+   <CheckBox fx:id="IsIncludeReturnFlight" layoutX="364.0" layoutY="75.0" mnemonicParsing="false" text="Includes return flight?" />
+   <Text fill="WHITE" layoutX="363.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" wrappingWidth="208.52948017418385">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <TextField fx:id="Price" layoutX="363.0" layoutY="284.0" prefHeight="26.0" prefWidth="77.0" style="-fx-background-color: #d6a900;" />
+   <ComboBox fx:id="TicketType" layoutX="362.0" layoutY="135.0" prefWidth="150.0" />
+    <Text fx:id="companyError" fill="RED" layoutX="156.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must be filled" visible="false" wrappingWidth="182.7294921875">
+        <font>
+            <Font size="12.0" />
+        </font>
+    </Text>
+    <Text fx:id="startDateError" fill="RED" layoutX="157.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must be filled" visible="false" wrappingWidth="182.7294921875">
+        <font>
+            <Font size="12.0" />
+        </font>
+    </Text>
+   <Text fx:id="endDateError" fill="RED" layoutX="157.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must be filled" visible="false" wrappingWidth="182.7294921875">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Text>
+   <Text fx:id="countryNameError" fill="#ff0e0e" layoutX="41.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must be filled" visible="false" wrappingWidth="108.7294921875" />
+    <Text fx:id="badTicNum" fill="#ff0e0e" layoutX="123.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filed must be a number" visible="false" wrappingWidth="195.7294921875">
+    </Text>
+    <Text fx:id="priceError" fill="RED" layoutX="446.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Field must be a number" visible="false" wrappingWidth="182.7294921875">
+        <font>
+            <Font size="12.0" />
+        </font>
+    </Text>
+   <Text fx:id="ticketTypeError" fill="#ff0e0e" layoutX="524.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must be filled" visible="false" wrappingWidth="108.7294921875" />
+
+</AnchorPane>

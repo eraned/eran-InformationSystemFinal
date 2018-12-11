@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #edc157;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.VacationDetailesView">
+    <Text fill="WHITE" layoutX="206.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vacation Detailes" textAlignment="CENTER" wrappingWidth="239.7294921875">
+        <font>
+            <Font size="30.0" />
+        </font>
+    </Text>
+    <Text fill="WHITE" layoutX="14.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AirLine Company" wrappingWidth="162.7294921875">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Text>
+    <Text fill="WHITE" layoutX="14.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="StartDate" wrappingWidth="162.7294921875">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Text>
+    <Text fill="WHITE" layoutX="360.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticket Type" wrappingWidth="201.92951571941376">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Text>
+    <Text fill="WHITE" layoutX="363.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter accommodation Name" wrappingWidth="208.52948017418385">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Text>
+    <TextField fx:id="AirLineCompany" editable="false" layoutX="14.0" layoutY="74.0" prefHeight="21.0" prefWidth="218.0" style="-fx-background-color: #d6a900;" />
+    <Text fx:id="incorrect" fill="#ff0e0e" layoutX="157.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User name already exists" visible="false" wrappingWidth="180.7294921875">
+        <font>
+            <Font name="System Bold" size="15.0" />
+        </font>
+    </Text>
+    <Text fx:id="badTicNum" fill="#ff0e0e" layoutX="160.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Field Must be Number" visible="false" wrappingWidth="195.7294921875">
+    </Text>
+
+    <Text fx:id="userNameError" fill="RED" layoutX="156.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User name is already taken" visible="false" wrappingWidth="182.7294921875">
+        <font>
+            <Font size="12.0" />
+        </font>
+    </Text>
+    <Text fx:id="passWordError" fill="RED" layoutX="156.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password can not be empty" visible="false" wrappingWidth="182.7294921875">
+        <font>
+            <Font size="12.0" />
+        </font>
+    </Text>
+    <Text fx:id="firstNameError" fill="RED" layoutX="492.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First name can not be empty" visible="false" wrappingWidth="182.7294921875">
+        <font>
+            <Font size="12.0" />
+        </font>
+    </Text>
+    <Text fx:id="lastNameError" fill="RED" layoutX="492.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name can not be empty" visible="false" wrappingWidth="182.7294921875">
+        <font>
+            <Font size="12.0" />
+        </font>
+    </Text>
+    <Text fx:id="badRank" fill="RED" layoutX="492.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Field is Number 1-5" visible="false" wrappingWidth="182.7294921875">
+        <font>
+            <Font size="12.0" />
+        </font>
+    </Text>
+   <Text fill="WHITE" layoutX="14.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EndDate" wrappingWidth="162.7294921875">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <Text fill="WHITE" layoutX="14.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticket Numbers" wrappingWidth="162.7294921875">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <TextField fx:id="TicketNumbers" editable="false" layoutX="16.0" layoutY="251.0" prefHeight="26.0" prefWidth="96.0" style="-fx-background-color: #d6a900;" />
+   <CheckBox fx:id="IsIncludeAccommodation" layoutX="364.0" layoutY="165.0" mnemonicParsing="false" text="IsInclude accommodation" />
+   <TextField fx:id="AccommodationName" editable="false" layoutX="360.0" layoutY="219.0" prefHeight="10.0" prefWidth="225.0" style="-fx-background-color: #d6a900;" />
+   <Text fill="WHITE" layoutX="14.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country Name" wrappingWidth="162.7294921875">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <TextField fx:id="CountryName" editable="false" layoutX="10.0" layoutY="305.0" prefHeight="10.0" prefWidth="225.0" style="-fx-background-color: #d6a900;" />
+   <CheckBox fx:id="IsIncludeReturnFlight" layoutX="364.0" layoutY="75.0" mnemonicParsing="false" text="IsInclude Return Flight" />
+   <Text fill="WHITE" layoutX="363.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" wrappingWidth="208.52948017418385">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <TextField fx:id="Price" editable="false" layoutX="363.0" layoutY="284.0" prefHeight="26.0" prefWidth="77.0" style="-fx-background-color: #d6a900;" />
+   <ComboBox fx:id="TicketType" layoutX="362.0" layoutY="135.0" prefWidth="150.0" />
+   <TextField fx:id="StartDate" editable="false" layoutX="13.0" layoutY="135.0" prefHeight="21.0" prefWidth="218.0" style="-fx-background-color: #d6a900;" />
+   <TextField fx:id="EndDate" editable="false" layoutX="14.0" layoutY="189.0" prefHeight="21.0" prefWidth="218.0" style="-fx-background-color: #d6a900;" />
+   <Text fill="WHITE" layoutX="150.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Created By :" wrappingWidth="162.7294921875">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <TextField fx:id="UserName" editable="false" layoutX="250.0" layoutY="347.0" prefHeight="26.0" prefWidth="174.0" style="-fx-background-color: #d6a900;" />
+
+</AnchorPane>

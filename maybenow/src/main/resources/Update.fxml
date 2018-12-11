@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.PasswordField?>
+<AnchorPane onMouseEntered="#init" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #edc157;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.UpdateView">
+    <Text fill="WHITE" layoutX="230.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update" textAlignment="CENTER" wrappingWidth="239.7294921875">
+        <font>
+            <Font size="30.0" />
+        </font>
+    </Text>
+    <Text fill="WHITE" layoutX="67.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User name" wrappingWidth="162.7294921875">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Text>
+    <Text fill="WHITE" layoutX="67.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="162.7294921875">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Text>
+    <Text fill="WHITE" layoutX="67.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Birth date" wrappingWidth="162.7294921875">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Text>
+    <Text fill="WHITE" layoutX="400.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First name" wrappingWidth="162.7294921875">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Text>
+    <Text fill="WHITE" layoutX="400.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name" wrappingWidth="162.7294921875">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Text>
+    <Text fill="WHITE" layoutX="400.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City" wrappingWidth="162.7294921875">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Text>
+    <TextField fx:id="userName" layoutX="67.0" layoutY="120.0" prefHeight="26.0" prefWidth="240.0" style="-fx-background-color: #d6a900;" text="******" />
+    <PasswordField fx:id="password" layoutX="67.0" layoutY="190.0" prefHeight="26.0" prefWidth="240.0" style="-fx-background-color: #d6a900;" text="******" />
+    <TextField fx:id="birth" layoutX="67.0" layoutY="260.0" prefHeight="31.0" prefWidth="240.0" style="-fx-background-color: #d6a900;"/>
+    <TextField fx:id="firstName" layoutX="400.0" layoutY="120.0" prefHeight="26.0" prefWidth="240.0" style="-fx-background-color: #d6a900;" text="******" />
+    <TextField fx:id="lastName" layoutX="400.0" layoutY="190.0" prefHeight="26.0" prefWidth="240.0" style="-fx-background-color: #d6a900;" text="******" />
+    <TextField fx:id="city" layoutX="400.0" layoutY="260.0" prefHeight="26.0" prefWidth="240.0" style="-fx-background-color: #d6a900;" text="******" />
+    <Button layoutX="400.0" layoutY="323.0" mnemonicParsing="false" onAction="#updateInfo" prefHeight="39.0" prefWidth="121.0" style="-fx-background-color: #d6a900;" text="Update" textAlignment="CENTER" textFill="WHITE">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Button>
+    <Button layoutX="187.0" layoutY="323.0" mnemonicParsing="false" onAction="#back" prefHeight="39.0" prefWidth="121.0" style="-fx-background-color: #d6a900;" text="Back" textAlignment="CENTER" textFill="WHITE">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Button>
+   <Text fx:id="userNameError" fill="RED" layoutX="156.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User name is already taken" visible="false" wrappingWidth="182.7294921875">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Text>
+   <Text fx:id="passWordError" fill="RED" layoutX="156.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password can not be empty" visible="false" wrappingWidth="182.7294921875">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Text>
+   <Text fx:id="birthDateError" fill="RED" layoutX="156.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have to be above 18" visible="false" wrappingWidth="182.7294921875">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Text>
+   <Text fx:id="firstNameError" fill="RED" layoutX="492.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First name can not be empty" visible="false" wrappingWidth="182.7294921875">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Text>
+   <Text fx:id="lastNameError" fill="RED" layoutX="492.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name can not be empty" visible="false" wrappingWidth="182.7294921875">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Text>
+   <Text fx:id="cityError" fill="RED" layoutX="492.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City can not be empty" visible="false" wrappingWidth="182.7294921875">
+      <font>
+         <Font size="12.0" />
+      </font>
+   </Text>
+   <Text fx:id="updateSucc" fill="#01a81d" layoutX="268.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update successfully!" visible="false" wrappingWidth="162.7294921875">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+</AnchorPane>
