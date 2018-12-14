@@ -18,6 +18,7 @@ public class OperationView extends View {
     public Button SearchAccount;
     public Text welcome;
     public Button AddVacation;
+    public Button Orders;
 
     public void UpdateAccount(ActionEvent actionEvent) {
         controller.setScreen(Main.UPDATE_SCREEN);
@@ -63,5 +64,9 @@ public class OperationView extends View {
 
         controller.setScreen(Main.Search_vacation);
 
+    }
+
+    public void Orders() {
+        controller.setScreen(Main.ORDERS_SCREEN);
     }
 }

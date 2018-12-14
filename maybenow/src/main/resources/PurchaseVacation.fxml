@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #edc157;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.PurchasevacationView">
+<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #edc157;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.PurchaseVacationView">
     <Text fill="WHITE" layoutX="84.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment Page" textAlignment="CENTER" wrappingWidth="239.7294921875">
         <font>
             <Font size="30.0" />

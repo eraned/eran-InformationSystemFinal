@@ -40,14 +40,19 @@ public class SearchVacationView extends View {
     }
 
     public void Search() {
+        VBox root = new VBox();
+        HBox hbox;
+        init();
         ArrayList<String> vacationsIdForSpecificCountry = controller.getVacationResults(CountryName.getText().toUpperCase());
         if(vacationsIdForSpecificCountry.size()==0){
             noVacationsText.setVisible(true);
+            scrollpane.setVisible(false);
             return;
         }
-        else
+        else {
             noVacationsText.setVisible(false);
-        VBox root = new VBox();
+            scrollpane.setVisible(true);
+        }
         scrollpane.setContent(root);
         root.setSpacing(10);
         for (String id :
@@ -94,7 +99,7 @@ public class SearchVacationView extends View {
                         PurchaseWindow = new Stage();
                         PurchaseWindow.initModality(Modality.APPLICATION_MODAL);
                         PurchaseWindow.setTitle("Purchase");
-                        FXMLLoader loader3 = new FXMLLoader(getClass().getClassLoader().getResource("Purchasevacation.fxml"));
+                        FXMLLoader loader3 = new FXMLLoader(getClass().getClassLoader().getResource("PurchaseVacation.fxml"));
                         Parent loadScreen = loader3.load();
                         Scene scene = new Scene(loadScreen, 500, 400);
                         PurchaseWindow.setScene(scene);
@@ -110,13 +115,13 @@ public class SearchVacationView extends View {
             b2.setStyle("-fx-background-color: #d6a900");
             Label l1 = new Label("Vacation Id: " + id + "   ");
             Label l2 = new Label("   ");
-            HBox hbox = new HBox(l1, b1, l2, b2);
+            hbox = new HBox(l1, b1, l2, b2);
             root.getChildren().add(hbox);
             root.setSpacing(10);
         }
     }
 
-    public void init(MouseEvent mouseEvent) {
+    public void init() {
         noVacationsText.setVisible(false);
     }
 }

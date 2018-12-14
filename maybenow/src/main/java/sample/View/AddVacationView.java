@@ -29,11 +29,10 @@ public class AddVacationView extends View {
             return;
         controller.AddVacation(controller.getCurrentUser(), AirLineCompany.getText(), StartDate.getValue(), EndDate.getValue(), TicketNumbers.getText(),
                 CountryName.getText(), IsIncludeReturnFlight.isSelected(), TicketType.getSelectionModel().getSelectedItem().toString(), IsIncludeAccommodation.isSelected(),
-                AccommodationName.getText(), Price.getText());
+                AccommodationName.getText(), Price.getText(),"Waiting","");
 
         Alert Sucess = new Alert(Alert.AlertType.INFORMATION);
-        Sucess.setTitle("vacation Added Succesfully!");
-        Sucess.setHeaderText("vacation Added Succesfully");
+        Sucess.setTitle("Vacation was added!!");
         Sucess.show();
         init();
         back();
@@ -53,21 +52,21 @@ public class AddVacationView extends View {
             endDateError.setVisible(true);
             validation = false;
         }
-        if(!CheckNumber(TicketNumbers.getText())){
+        if (!CheckNumber(TicketNumbers.getText())) {
             badTicNum.setVisible(true);
-            validation=false;
+            validation = false;
         }
-        if(CountryName.getText().equals("")){
+        if (CountryName.getText().equals("")) {
             countryNameError.setVisible(true);
-            validation=false;
+            validation = false;
         }
-        if(!CheckNumber(Price.getText())){
+        if (!CheckNumber(Price.getText())) {
             priceError.setVisible(true);
-            validation=false;
+            validation = false;
         }
-        if(TicketType.getValue()==null){
-            countryNameError.setVisible(true);
-            validation=false;
+        if (TicketType.getValue() == null) {
+            ticketTypeError.setVisible(true);
+            validation = false;
         }
         return validation;
     }
@@ -80,7 +79,7 @@ public class AddVacationView extends View {
 
     /*Checking if a string is a number */
     private boolean CheckNumber(String num) {
-        if(num.length()==0)
+        if (num.length() == 0)
             return false;
 
         for (int i = 0; i < num.length(); i++) {
@@ -106,7 +105,11 @@ public class AddVacationView extends View {
         endDateError.setVisible(false);
         countryNameError.setVisible(false);
         ticketTypeError.setVisible(false);
-        TicketType.getItems().removeAll(TicketType.getItems());
-        TicketType.getItems().addAll("Adult", "Kid", "Baby");
+
+    }
+
+    public void initTypes(MouseEvent mouseEvent) {
+        if(TicketType.getItems().size() == 0)
+            TicketType.getItems().addAll("Adult", "Kid", "Baby");
     }
 }

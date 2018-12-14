@@ -42,5 +42,10 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <Button fx:id="Orders" layoutX="322.0" layoutY="230.0" mnemonicParsing="false" onAction="#Orders" prefHeight="35.0" prefWidth="191.0" style="-fx-background-color: #d6a900;" text="Orders" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

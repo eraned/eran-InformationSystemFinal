@@ -1,4 +1,4 @@
-package sample;
+package sample.Controller;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -52,8 +52,8 @@ public class Controller {
         return model.updateUser(userName, password, birth, firstName, lastName, city);
     }
 
-    public boolean AddVacation(String UserName,String AirlineCompany,LocalDate Startdate,LocalDate Enddate,String TicketNum,String country,boolean IsIncludeReturnFlight,String TicketType,boolean IsIncludeaccommodation,String Nameaccommodation,String Price){
-        return model.AddVacation(UserName, AirlineCompany, Startdate, Enddate, TicketNum, country, IsIncludeReturnFlight, TicketType, IsIncludeaccommodation, Nameaccommodation, Price);
+    public boolean AddVacation(String UserName,String AirlineCompany,LocalDate Startdate,LocalDate Enddate,String TicketNum,String country,boolean IsIncludeReturnFlight,String TicketType,boolean IsIncludeaccommodation,String Nameaccommodation,String Price,String status,String interested){
+        return model.AddVacation(UserName, AirlineCompany, Startdate, Enddate, TicketNum, country, IsIncludeReturnFlight, TicketType, IsIncludeaccommodation, Nameaccommodation, Price,status,interested);
     }
 
     public void setCurrentUser(String userName) {
@@ -91,5 +91,22 @@ public class Controller {
 
     public ArrayList<String> getVacationResults(String text) {
         return model.getVacationResults(text);
+    }
+
+    public void addInterested(String vacationId, String userName) {
+        model.addInterested(vacationId,userName);
+    }
+
+    public ArrayList<String> getVacationsUserIsSelling(String username){
+        return model.getVacationsUserIsSelling(username);
+    }
+
+    public ArrayList<String> getVacationsUserIsInterested(String username){
+        return model.getVacationsUserIsInterested(username);
+    }
+
+    public void approveSale(String id) {
+        model.approveSale(id);
+
     }
 }

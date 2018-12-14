@@ -9,6 +9,7 @@ public class Model {
     private Connection connection;
     private String currentUser;
     private HashMap<String, String> userInfo;
+
     public Model() {
         connection = SQLiteConnection.Connector();
     }
@@ -29,11 +30,8 @@ public class Model {
         return false;
     }
 
-
-
-    public boolean AddPayment(String vacationID, String CardOwner,String CreditCardNum ,LocalDate Validation) {
-
-        String sql = "INSERT INTO Payments(vacationID,CardOwner,CreditCardNum,Validation) VALUES(?,?,?,?)";
+    public boolean AddPayment(String vacationID, String CardOwner, String CreditCardNum, LocalDate Validation) {
+        String sql = "INSERT INTO Payments(vacationID,CardOwner,CreditCardNum,Validation,Status) VALUES(?,?,?,?,?)";
         try (Connection conn = SQLiteConnection.Connector();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, vacationID);
@@ -41,26 +39,20 @@ public class Model {
             pstmt.setString(3, CreditCardNum);
             String strdate = Validation.getDayOfMonth() + "/" + Validation.getMonthValue() + "/" + Validation.getYear();
             pstmt.setString(4, strdate);
+            pstmt.setString(5, "Pending");
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            // System.out.println(e.getMessage());
+             System.out.println(e.getMessage());
             return false;
         }
         return true;
     }
 
-
-
-
-
-
-
-    public boolean AddVacation(String UserName,String AirlineCompany,LocalDate Startdate,LocalDate Enddate,String TicketNum,String country,boolean IsIncludeReturnFlight,String TicketType,boolean IsIncludeaccommodation,String Nameaccommodation,String Price){
-        String sql = "INSERT INTO vacations(VacationID,UserName,airlinecompany,StartDate,EndDate,TicketNumber,StateName,IsIncludeReturnFlight,TicketType,IsIncludeRoomaccommodation,Nameaccommodation,Price) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+    public boolean AddVacation(String UserName, String AirlineCompany, LocalDate Startdate, LocalDate Enddate, String TicketNum, String country, boolean IsIncludeReturnFlight, String TicketType, boolean IsIncludeaccommodation, String Nameaccommodation, String Price, String status, String interested) {
+        String sql = "INSERT INTO vacations(VacationID,UserName,airlinecompany,StartDate,EndDate,TicketNumber,StateName,IsIncludeReturnFlight,TicketType,IsIncludeRoomaccommodation,Nameaccommodation,Price,status,interested) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try (Connection conn = SQLiteConnection.Connector();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1,(getNumberOfVacationInDB()+1)+"");
+            pstmt.setString(1, (getNumberOfVacationInDB() + 1) + "");
             pstmt.setString(2, UserName);
             pstmt.setString(3, AirlineCompany);
             String strStartdate = Startdate.getDayOfMonth() + "/" + Startdate.getMonthValue() + "/" + Startdate.getYear();
@@ -68,31 +60,26 @@ public class Model {
             String strEndtdate = Enddate.getDayOfMonth() + "/" + Enddate.getMonthValue() + "/" + Enddate.getYear();
             pstmt.setString(5, strEndtdate);
 
-            pstmt.setString(6, TicketNum+"");
+            pstmt.setString(6, TicketNum + "");
             pstmt.setString(7, country.toUpperCase());
-            if(IsIncludeReturnFlight) {
+            if (IsIncludeReturnFlight) {
                 pstmt.setString(8, "Yes");
-            }
-            else{
+            } else {
                 pstmt.setString(8, "No");
             }
-            pstmt.setString(9,TicketType);
-            if(IsIncludeaccommodation)
-            pstmt.setString(10,"Yes");
+            pstmt.setString(9, TicketType);
+            if (IsIncludeaccommodation)
+                pstmt.setString(10, "Yes");
             else
-                pstmt.setString(10,"No");
+                pstmt.setString(10, "No");
 
-            pstmt.setString(11,Nameaccommodation );
-            pstmt.setString(12,Price+"");
-
-
-
-
-
-
+            pstmt.setString(11, Nameaccommodation);
+            pstmt.setString(12, Price + "");
+            pstmt.setString(13, status);
+            pstmt.setString(14, interested);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            // System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
             return false;
         }
         return true;
@@ -187,7 +174,6 @@ public class Model {
         return vacationDetailes;
     }
 
-
     public void getInfo(String userName) {
         userInfo = new HashMap<>();
         String sql = "SELECT username,password,birth,firstName,lastName,city " +
@@ -215,18 +201,16 @@ public class Model {
         return currentUser;
     }
 
-    public int getNumberOfVacationInDB(){
-        String sql ="SELECT Count(*) AS VacationID FROM vacations";
+    public int getNumberOfVacationInDB() {
+        String sql = "SELECT Count(*) AS VacationID FROM vacations";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             ResultSet rs = preparedStatement.executeQuery();
 
-            return   rs.getInt("VacationID");
-        }
-
-        catch(Exception e) {
+            return rs.getInt("VacationID");
+        } catch (Exception e) {
             e.printStackTrace();
         }
-            return 0;
+        return 0;
     }
 
     public void setCurrentUser(String userName) {
@@ -263,21 +247,103 @@ public class Model {
     public ArrayList<String> getVacationResults(String Country) {
         ArrayList<String> VacationNumbers = new ArrayList<>();
         String sql = "SELECT VacationID "
-                + "FROM vacations WHERE StateName  = ?";
+                + "FROM vacations WHERE StateName  = ? AND Status = ?";
 
 
         try (
-             PreparedStatement pstmt  = connection.prepareStatement(sql)){
-            pstmt.setString(1,Country);
-            ResultSet rs  = pstmt.executeQuery();
+                PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, Country);
+            pstmt.setString(2, "Waiting");
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                VacationNumbers.add(rs.getString("VacationID")) ;
+                VacationNumbers.add(rs.getString("VacationID"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
-        return  VacationNumbers;
+        return VacationNumbers;
 
+    }
+
+    public boolean addInterested(String vacationId, String userName) {
+        String sql = "UPDATE vacations SET status = ?, interested = ?"
+                + "  WHERE VacationID = ?";
+
+        try (Connection conn = SQLiteConnection.Connector();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, "WaitingApproval");
+            pstmt.setString(2, userName);
+            pstmt.setString(3, vacationId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    public ArrayList<String> getVacationsUserIsSelling(String userName) {
+        ArrayList<String> VacationNumbers = new ArrayList<>();
+        String sql = "SELECT VacationID "
+                + "FROM vacations WHERE UserName  = ? AND Status = ?";
+        try (
+                PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, userName);
+            pstmt.setString(2, "WaitingApproval");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                VacationNumbers.add(rs.getString("VacationID"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return VacationNumbers;
+
+    }
+
+    public ArrayList<String> getVacationsUserIsInterested(String userName) {
+        ArrayList<String> VacationNumbers = new ArrayList<>();
+        String sql = "SELECT VacationID "
+                + "FROM vacations WHERE Interested  = ? AND Status = ?";
+        try (
+                PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, userName);
+            pstmt.setString(2, "WaitingApproval");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                VacationNumbers.add(rs.getString("VacationID"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return VacationNumbers;
+    }
+
+    public boolean approveSale(String id) {
+        String sql = "UPDATE vacations SET status = ?"
+                + "  WHERE VacationID = ?";
+        try (Connection conn = SQLiteConnection.Connector();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, "Sold");
+            pstmt.setString(2, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        sql = "UPDATE Payments SET Status = ?"
+                + "  WHERE VacationID = ?";
+        try (Connection conn = SQLiteConnection.Connector();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, "Approved");
+            pstmt.setString(2, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
     }
 }

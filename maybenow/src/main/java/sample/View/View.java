@@ -1,6 +1,6 @@
 package sample.View;
 
-import sample.Controller;
+import sample.Controller.Controller;
 
 public class View {
     protected static Controller controller;

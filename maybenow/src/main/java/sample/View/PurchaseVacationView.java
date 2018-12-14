@@ -30,6 +30,7 @@ public class PurchaseVacationView extends View {
             return;
         }
         controller.AddPayment(vacationID.getText(), userName, CreditNumber.getText(), Validation.getValue());
+        controller.addInterested(vacationID.getText(),userName);
         Stage stage = (Stage) CreditNumber.getScene().getWindow();
         stage.close();
     }

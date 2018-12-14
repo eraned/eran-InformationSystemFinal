@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane onMouseEntered="#init" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #edc157;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.OrdersView">
+    <ScrollPane fx:id="scrollpanelOther" layoutX="332.0" layoutY="92.0" prefHeight="227.0" prefWidth="300.0" style="-fx-background-color: #edc157;" stylesheets="@dateColor.css" translateX="120.0">
+        <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="209.0" prefWidth="245.0" translateY="50.0" />
+        </content>
+    </ScrollPane>
+    <Text fx:id="noVacationsText" fill="#f89100" layoutX="350.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sorry, no vacations were found for that destination." visible="false" wrappingWidth="284.99999612569803">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Text>
+    <Button layoutX="165.0" layoutY="332.0" mnemonicParsing="false" onAction="#back" prefHeight="39.0" prefWidth="121.0" style="-fx-background-color: #d6a900;" text="Back" textAlignment="CENTER" textFill="WHITE">
+        <font>
+            <Font size="18.0" />
+        </font>
+    </Button>
+    <Text fill="WHITE" layoutX="45.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for your approval:" wrappingWidth="239.99999612569803">
+        <font>
+            <Font size="15.0" />
+        </font>
+    </Text>
+    <Text fill="WHITE" layoutX="189.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders" textAlignment="CENTER" wrappingWidth="239.7294921875">
+        <font>
+            <Font size="30.0" />
+        </font>
+    </Text>
+   <Text fill="WHITE" layoutX="451.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for seller's approval:" wrappingWidth="239.99999612569803">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <ScrollPane fx:id="scrollpane1" layoutX="15.0" layoutY="92.0" prefHeight="227.0" prefWidth="300.0" style="-fx-background-color: #edc157;" stylesheets="@dateColor.css" translateX="30.0">
+      <content>
+         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="209.0" prefWidth="245.0" translateY="50.0" />
+      </content>
+   </ScrollPane>
+</AnchorPane>

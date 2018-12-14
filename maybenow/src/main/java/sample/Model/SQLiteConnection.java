@@ -45,14 +45,17 @@ public class SQLiteConnection {
                 + "	TicketType text NOT NULL,\n"
                 + "	IsIncludeRoomaccommodation text NOT NULL,\n"
                 + "	Nameaccommodation text,\n"
-                + "	Price text\n"
+                + "	Price text,\n"
+                + "	Status text,\n"
+                + "	Interested text\n"
                 + ");";
 
         String sql3 = "CREATE TABLE IF NOT EXISTS Payments (\n"
                 + "	vacationID text NOT NULL,\n"
                 + "	CardOwner text real,\n"
                 + "	CreditCardNum text NOT NULL,\n"
-                + "	Validation text NOT NULL\n"
+                + "	Validation text NOT NULL,\n"
+                + "	Status text NOT NULL\n"
                 + ");";
 
         try (Connection conn = DriverManager.getConnection(url);
