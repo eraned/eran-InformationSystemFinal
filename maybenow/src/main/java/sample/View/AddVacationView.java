@@ -29,16 +29,19 @@ public class AddVacationView extends View {
             return;
         controller.AddVacation(controller.getCurrentUser(), AirLineCompany.getText(), StartDate.getValue(), EndDate.getValue(), TicketNumbers.getText(),
                 CountryName.getText(), IsIncludeReturnFlight.isSelected(), TicketType.getSelectionModel().getSelectedItem().toString(), IsIncludeAccommodation.isSelected(),
-                AccommodationName.getText(), Price.getText(),"Waiting","");
+                AccommodationName.getText(), Price.getText(), "Waiting", "");
 
-        Alert Sucess = new Alert(Alert.AlertType.INFORMATION);
-        Sucess.setTitle("Vacation was added!!");
-        Sucess.show();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("");
+        alert.setHeaderText(null);
+        alert.setContentText("Vacation was added!");
+        alert.showAndWait();
         init();
         back();
     }
 
-    private boolean validation() {
+    private boolean validation()
+    {
         boolean validation = true;
         if (AirLineCompany.getText().equals("")) {
             companyError.setVisible(true);
@@ -109,7 +112,7 @@ public class AddVacationView extends View {
     }
 
     public void initTypes(MouseEvent mouseEvent) {
-        if(TicketType.getItems().size() == 0)
+        if (TicketType.getItems().size() == 0)
             TicketType.getItems().addAll("Adult", "Kid", "Baby");
     }
 }

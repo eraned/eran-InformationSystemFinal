@@ -47,7 +47,8 @@ public class SQLiteConnection {
                 + "	Nameaccommodation text,\n"
                 + "	Price text,\n"
                 + "	Status text,\n"
-                + "	Interested text\n"
+                + "	Interested text,\n"
+                + "	Offer text\n"
                 + ");";
 
         String sql3 = "CREATE TABLE IF NOT EXISTS Payments (\n"

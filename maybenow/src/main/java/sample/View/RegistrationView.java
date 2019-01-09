@@ -24,7 +24,9 @@ public class RegistrationView extends View {
 
     public void RegisterUser() throws SQLException {
 
-        if(!validation()){return;}
+        if (!validation()) {
+            return;
+        }
         LocalDate date = birth.getValue();
         if (controller.registerUser(userName.getText(), password.getText(), date, firstName.getText(), lastName.getText(), city.getText())) {
             System.out.println("Register User successful!!");
@@ -71,7 +73,7 @@ public class RegistrationView extends View {
         }
         if (2018 - year < 18) {
             badage.setVisible(true);
-            result= false;
+            result = false;
         }
         if (userName.getText().equals("")) {
             result = false;

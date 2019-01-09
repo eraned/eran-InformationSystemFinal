@@ -21,19 +21,21 @@ import java.util.HashMap;
 public class OrdersView extends View {
 
     public Text noVacationsText;
-    public ScrollPane scrollpane1;
-    public ScrollPane scrollpanelOther;
+    public ScrollPane scrollpanelCash;
+    public ScrollPane scrollpanelOtherCash;
+    public ScrollPane scrollpanelTrade;
+    public ScrollPane scrollpanelOtherTrade;
 
     public void init() {
-        ArrayList<String> vacationsUserIsSelling = controller.getVacationsUserIsSelling(controller.getCurrentUser());
-        ArrayList<String> vacationsUserIsInterested = controller.getVacationsUserIsInterested(controller.getCurrentUser());
-        VBox root = new VBox();
-        VBox rootOther = new VBox();
-        scrollpane1.setContent(root);
-        scrollpanelOther.setContent(rootOther);
-        root.setSpacing(10);
+        ArrayList<String> vacationsUserIsSellingCash = controller.getVacationsUserIsSellingApproval(controller.getCurrentUser(), true);
+        ArrayList<String> vacationsUserIsInterestedCash = controller.getVacationsUserIsInterested(controller.getCurrentUser(), true);
+        VBox rootCash = new VBox();
+        VBox rootOtherCash = new VBox();
+        scrollpanelCash.setContent(rootCash);
+        scrollpanelOtherCash.setContent(rootOtherCash);
+        rootCash.setSpacing(10);
         for (String id :
-                vacationsUserIsSelling) {
+                vacationsUserIsSellingCash) {
             Button b1 = new Button("details");
             b1.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -48,8 +50,8 @@ public class OrdersView extends View {
                         Scene scene = new Scene(loadScreen, 630, 400);
                         detailsWindow.setScene(scene);
                         VacationDetailesView VacationDetailcontroller2 = loader2.getController();
-                        HashMap<String, String> Detailes = controller.getVacationDetalies(id);
-                        VacationDetailcontroller2.setDetailes(Detailes.get("UserName"), Detailes.get("airlinecompany")
+                        HashMap<String, String> Detailes = controller.getVacationDetails(id);
+                        VacationDetailcontroller2.setDetails(Detailes.get("UserName"), Detailes.get("airlinecompany")
                                 , Detailes.get("StartDate"), Detailes.get("EndDate"), Detailes.get("TicketNumber"), Detailes.get("StateName"), (boolean) CastStringToBoolean(Detailes.get("IsIncludeReturnFlight")),
                                 Detailes.get("TicketType"), (boolean) CastStringToBoolean(Detailes.get("IsIncludeRoomaccommodation")), Detailes.get("Nameaccommodation"), Detailes.get("Price"));
                         detailsWindow.show();
@@ -74,16 +76,31 @@ public class OrdersView extends View {
                     }
                 }
             });
+            Button b3 = new Button("Decline");
+            b3.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    try {
+                        controller.rejectOffer(id);
+                        Alert error = new Alert(Alert.AlertType.INFORMATION);
+                        error.setTitle("Declined!");
+                        error.setContentText("The offer was rejected!");
+                        error.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
             b1.setStyle("-fx-background-color: #d6a900");
             b2.setStyle("-fx-background-color: #d6a900");
+            b3.setStyle("-fx-background-color: #d6a900");
             Label l1 = new Label("Vacation Id: " + id + "   ");
-            Label l2 = new Label("   ");
-            HBox hbox = new HBox(l1, b1, l2, b2);
-            root.getChildren().add(hbox);
-            root.setSpacing(10);
+            HBox hbox = new HBox(l1, b1, new Label("   "), b2, new Label("   "), b3);
+            rootCash.getChildren().add(hbox);
+            rootCash.setSpacing(10);
         }
         for (String id :
-                vacationsUserIsInterested) {
+                vacationsUserIsInterestedCash) {
             Button b1 = new Button("details");
             b1.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -98,8 +115,8 @@ public class OrdersView extends View {
                         Scene scene = new Scene(loadScreen, 630, 400);
                         detailsWindow.setScene(scene);
                         VacationDetailesView VacationDetailcontroller2 = loader2.getController();
-                        HashMap<String, String> Detailes = controller.getVacationDetalies(id);
-                        VacationDetailcontroller2.setDetailes(Detailes.get("UserName"), Detailes.get("airlinecompany")
+                        HashMap<String, String> Detailes = controller.getVacationDetails(id);
+                        VacationDetailcontroller2.setDetails(Detailes.get("UserName"), Detailes.get("airlinecompany")
                                 , Detailes.get("StartDate"), Detailes.get("EndDate"), Detailes.get("TicketNumber"), Detailes.get("StateName"), (boolean) CastStringToBoolean(Detailes.get("IsIncludeReturnFlight")),
                                 Detailes.get("TicketType"), (boolean) CastStringToBoolean(Detailes.get("IsIncludeRoomaccommodation")), Detailes.get("Nameaccommodation"), Detailes.get("Price"));
                         detailsWindow.show();
@@ -112,15 +129,148 @@ public class OrdersView extends View {
             Label l1 = new Label("Vacation Id: " + id + "   ");
             Label l2 = new Label("   ");
             HBox hbox = new HBox(l1, b1, l2);
-            rootOther.getChildren().add(hbox);
-            rootOther.setSpacing(10);
+            rootOtherCash.getChildren().add(hbox);
+            rootOtherCash.setSpacing(10);
+        }
+        /////// TRADES ///////
+        ArrayList<String> vacationsUserIsSellingTrade = controller.getVacationsUserIsSellingApproval(controller.getCurrentUser(), false);
+        ArrayList<String> vacationsUserIsInterestedTrade = controller.getVacationsUserIsInterested(controller.getCurrentUser(), false);
+        VBox rootTrade = new VBox();
+        VBox rootOtherTrade = new VBox();
+        scrollpanelTrade.setContent(rootTrade);
+        scrollpanelOtherTrade.setContent(rootOtherTrade);
+        rootTrade.setSpacing(10);
+        for (String id :
+                vacationsUserIsSellingTrade) {
+            Button b1 = new Button("Yours");
+            b1.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    try {
+                        Stage detailsWindow;
+                        detailsWindow = new Stage();
+                        detailsWindow.initModality(Modality.APPLICATION_MODAL);
+                        detailsWindow.setTitle("Details");
+                        FXMLLoader loader2 = new FXMLLoader(getClass().getClassLoader().getResource("VacationDetails.fxml"));
+                        Parent loadScreen = loader2.load();
+                        Scene scene = new Scene(loadScreen, 630, 400);
+                        detailsWindow.setScene(scene);
+                        VacationDetailesView VacationDetailcontroller2 = loader2.getController();
+                        HashMap<String, String> Detailes = controller.getVacationDetails(id);
+                        VacationDetailcontroller2.setDetails(Detailes.get("UserName"), Detailes.get("airlinecompany")
+                                , Detailes.get("StartDate"), Detailes.get("EndDate"), Detailes.get("TicketNumber"), Detailes.get("StateName"), (boolean) CastStringToBoolean(Detailes.get("IsIncludeReturnFlight")),
+                                Detailes.get("TicketType"), (boolean) CastStringToBoolean(Detailes.get("IsIncludeRoomaccommodation")), Detailes.get("Nameaccommodation"), Detailes.get("Price"));
+                        detailsWindow.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            Button b2 = new Button("Offer");
+            b2.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    try {
+                        Stage detailsWindow;
+                        detailsWindow = new Stage();
+                        detailsWindow.initModality(Modality.APPLICATION_MODAL);
+                        detailsWindow.setTitle("Details");
+                        FXMLLoader loader2 = new FXMLLoader(getClass().getClassLoader().getResource("VacationDetails.fxml"));
+                        Parent loadScreen = loader2.load();
+                        Scene scene = new Scene(loadScreen, 630, 400);
+                        detailsWindow.setScene(scene);
+                        VacationDetailesView VacationDetailcontroller2 = loader2.getController();
+                        HashMap<String, String> toSell = controller.getVacationDetails(id);
+                        HashMap<String, String> Detailes = controller.getVacationDetails(toSell.get("Offer"));
+                        VacationDetailcontroller2.setDetails(Detailes.get("UserName"), Detailes.get("airlinecompany")
+                                , Detailes.get("StartDate"), Detailes.get("EndDate"), Detailes.get("TicketNumber"), Detailes.get("StateName"), (boolean) CastStringToBoolean(Detailes.get("IsIncludeReturnFlight")),
+                                Detailes.get("TicketType"), (boolean) CastStringToBoolean(Detailes.get("IsIncludeRoomaccommodation")), Detailes.get("Nameaccommodation"), Detailes.get("Price"));
+                        detailsWindow.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            Button b3 = new Button("Approve");
+            b3.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    try {
+                        controller.approveTrade(id);
+                        Alert error = new Alert(Alert.AlertType.INFORMATION);
+                        error.setTitle("Sold!");
+                        error.setContentText("The was traded with the user !");
+                        error.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            Button b4 = new Button("Decline");
+            b4.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    try {
+                        controller.rejectOffer(id);
+                        Alert error = new Alert(Alert.AlertType.INFORMATION);
+                        error.setTitle("Declined!");
+                        error.setContentText("The offer was rejected!");
+                        error.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            b1.setStyle("-fx-background-color: #d6a900");
+            b2.setStyle("-fx-background-color: #d6a900");
+            b3.setStyle("-fx-background-color: #d6a900");
+            b4.setStyle("-fx-background-color: #d6a900");
+            Label l1 = new Label("Vacation Id: " + id + "   ");
+            HBox hbox = new HBox(l1, b1, new Label("   "), b2, new Label("   "), b3, new Label("   "), b4);
+            rootTrade.getChildren().add(hbox);
+            rootTrade.setSpacing(10);
+        }
+        for (String id :
+                vacationsUserIsInterestedTrade) {
+            Button b1 = new Button("details");
+            b1.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    try {
+                        Stage detailsWindow;
+                        detailsWindow = new Stage();
+                        detailsWindow.initModality(Modality.APPLICATION_MODAL);
+                        detailsWindow.setTitle("Details");
+                        FXMLLoader loader2 = new FXMLLoader(getClass().getClassLoader().getResource("VacationDetails.fxml"));
+                        Parent loadScreen = loader2.load();
+                        Scene scene = new Scene(loadScreen, 630, 400);
+                        detailsWindow.setScene(scene);
+                        VacationDetailesView VacationDetailcontroller2 = loader2.getController();
+                        HashMap<String, String> Detailes = controller.getVacationDetails(id);
+                        VacationDetailcontroller2.setDetails(Detailes.get("UserName"), Detailes.get("airlinecompany")
+                                , Detailes.get("StartDate"), Detailes.get("EndDate"), Detailes.get("TicketNumber"), Detailes.get("StateName"), (boolean) CastStringToBoolean(Detailes.get("IsIncludeReturnFlight")),
+                                Detailes.get("TicketType"), (boolean) CastStringToBoolean(Detailes.get("IsIncludeRoomaccommodation")), Detailes.get("Nameaccommodation"), Detailes.get("Price"));
+                        detailsWindow.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            b1.setStyle("-fx-background-color: #d6a900");
+            Label l1 = new Label("Vacation Id: " + id + "   ");
+            Label l2 = new Label("   ");
+            HBox hbox = new HBox(l1, b1, l2);
+            rootOtherTrade.getChildren().add(hbox);
+            rootOtherTrade.setSpacing(10);
         }
     }
 
     public void back() {
         VBox root = new VBox();
-        scrollpane1.setContent(root);
-        scrollpanelOther.setContent(root);
+        scrollpanelCash.setContent(root);
+        scrollpanelOtherCash.setContent(root);
         controller.setScreen(Main.OPERATION_SCREEN);
     }
 

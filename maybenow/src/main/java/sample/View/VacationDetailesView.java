@@ -2,7 +2,6 @@ package sample.View;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 public class VacationDetailesView extends View {
@@ -21,10 +20,9 @@ public class VacationDetailesView extends View {
     public javafx.scene.text.Text badRank;
 
 
-
-    public void setDetailes(String UserName,String AirLineCompany,String StartDate,String EndDate,
-                            String TicketNumbers,String CountryName,boolean IsIncludeReturnFlight,
-                            String TicketType,boolean IsIncludeAccommodation,String AccommodationName,String Price ){
+    public void setDetails(String UserName, String AirLineCompany, String StartDate, String EndDate,
+                           String TicketNumbers, String CountryName, boolean IsIncludeReturnFlight,
+                           String TicketType, boolean IsIncludeAccommodation, String AccommodationName, String Price) {
 
         this.UserName.setText(UserName);
         this.AirLineCompany.setText(AirLineCompany);

@@ -51,16 +51,16 @@ public class OperationView extends View {
     }
 
     public void setWelcomeMessage(MouseEvent mouseEvent) {
-        welcome.setText("Welcome "+controller.getUserInfo().get("firstName")+"!");
+        welcome.setText("Welcome " + controller.getUserInfo().get("firstName") + "!");
     }
 
-    public void AddVaction(){
+    public void AddVaction() {
         controller.setScreen(Main.ADD_vacation
 
         );
     }
 
-    public void SearchVacation(){
+    public void SearchVacation() {
 
         controller.setScreen(Main.Search_vacation);
 

@@ -8,6 +8,7 @@ import java.util.HashMap;
 public class Model {
     private Connection connection;
     private String currentUser;
+    private User user;
     private HashMap<String, String> userInfo;
 
     public Model() {
@@ -42,7 +43,7 @@ public class Model {
             pstmt.setString(5, "Pending");
             pstmt.executeUpdate();
         } catch (SQLException e) {
-             System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
             return false;
         }
         return true;
@@ -150,7 +151,7 @@ public class Model {
     public HashMap<String, String> GetVacationDetalies(String VacationID) {
         HashMap<String, String> vacationDetailes = new HashMap<>();
         String sql = "SELECT VacationID,UserName,airlinecompany,StartDate,EndDate,TicketNumber,StateName" +
-                ",IsIncludeReturnFlight,TicketType,IsIncludeRoomaccommodation,Nameaccommodation,Price " +
+                ",IsIncludeReturnFlight,TicketType,IsIncludeRoomaccommodation,Nameaccommodation,Price,Offer,Interested " +
                 "FROM vacations WHERE VacationID = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -167,6 +168,8 @@ public class Model {
             vacationDetailes.put("IsIncludeRoomaccommodation", rs.getString("IsIncludeRoomaccommodation"));
             vacationDetailes.put("Nameaccommodation", rs.getString("Nameaccommodation"));
             vacationDetailes.put("Price", rs.getString("Price"));
+            vacationDetailes.put("Offer", rs.getString("Offer"));
+            vacationDetailes.put("Interested", rs.getString("Interested"));
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -201,7 +204,7 @@ public class Model {
         return currentUser;
     }
 
-    public int getNumberOfVacationInDB() {
+    private int getNumberOfVacationInDB() {
         String sql = "SELECT Count(*) AS VacationID FROM vacations";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             ResultSet rs = preparedStatement.executeQuery();
@@ -248,8 +251,6 @@ public class Model {
         ArrayList<String> VacationNumbers = new ArrayList<>();
         String sql = "SELECT VacationID "
                 + "FROM vacations WHERE StateName  = ? AND Status = ?";
-
-
         try (
                 PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, Country);
@@ -266,13 +267,13 @@ public class Model {
 
     }
 
-    public boolean addInterested(String vacationId, String userName) {
+    public boolean addInterestedCash(String vacationId, String userName) {
         String sql = "UPDATE vacations SET status = ?, interested = ?"
                 + "  WHERE VacationID = ?";
 
         try (Connection conn = SQLiteConnection.Connector();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, "WaitingApproval");
+            pstmt.setString(1, "WaitingCashApproval");
             pstmt.setString(2, userName);
             pstmt.setString(3, vacationId);
             pstmt.executeUpdate();
@@ -283,14 +284,17 @@ public class Model {
         return true;
     }
 
-    public ArrayList<String> getVacationsUserIsSelling(String userName) {
+    public ArrayList<String> getVacationsUserIsSellingApproval(String userName, boolean cash) {
         ArrayList<String> VacationNumbers = new ArrayList<>();
         String sql = "SELECT VacationID "
                 + "FROM vacations WHERE UserName  = ? AND Status = ?";
         try (
                 PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, userName);
-            pstmt.setString(2, "WaitingApproval");
+            if (cash)
+                pstmt.setString(2, "WaitingCashApproval");
+            else
+                pstmt.setString(2, "WaitingTradeApproval");
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 VacationNumbers.add(rs.getString("VacationID"));
@@ -300,17 +304,36 @@ public class Model {
         }
 
         return VacationNumbers;
-
     }
 
-    public ArrayList<String> getVacationsUserIsInterested(String userName) {
+    public ArrayList<String> getVacationsUserIsSelling(String userName) {
+        ArrayList<String> VacationNumbers = new ArrayList<>();
+        String sql = "SELECT * " + "FROM vacations WHERE UserName  = ? AND Status = ?";
+        try (
+                PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, userName);
+            pstmt.setString(2, "Waiting");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                VacationNumbers.add(rs.getString("VacationID") + " , " + rs.getString("StateName") + " , " + rs.getString("StartDate") + " - " + rs.getString("EndDate"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return VacationNumbers;
+    }
+
+    public ArrayList<String> getVacationsUserIsInterested(String userName, boolean cash) {
         ArrayList<String> VacationNumbers = new ArrayList<>();
         String sql = "SELECT VacationID "
                 + "FROM vacations WHERE Interested  = ? AND Status = ?";
         try (
                 PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, userName);
-            pstmt.setString(2, "WaitingApproval");
+            if (cash)
+                pstmt.setString(2, "WaitingCashApproval");
+            else
+                pstmt.setString(2, "WaitingTradeApproval");
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 VacationNumbers.add(rs.getString("VacationID"));
@@ -346,4 +369,79 @@ public class Model {
         }
         return true;
     }
+
+    public void addInterestedTrade(String vacationId, String userName, String offer) {
+        String sql = "UPDATE vacations SET status = ?, interested = ?, offer = ?"
+                + "  WHERE VacationID = ?";
+        try (Connection conn = SQLiteConnection.Connector();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, "WaitingTradeApproval");
+            pstmt.setString(2, userName);
+            pstmt.setString(3, offer);
+            pstmt.setString(4, vacationId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        try (Connection conn = SQLiteConnection.Connector();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, "WaitingAsOffer");
+            pstmt.setString(2, "");
+            pstmt.setString(3, "");
+            pstmt.setString(4, offer);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void rejectOffer(String id) {
+        HashMap<String, String> firstTradedVacation = GetVacationDetalies(id);
+        String sql = "UPDATE vacations SET status = ?"
+                + "  WHERE VacationID = ?";
+        try (Connection conn = SQLiteConnection.Connector();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, "Waiting");
+            pstmt.setString(2, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        try (Connection conn = SQLiteConnection.Connector();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, "Waiting");
+            pstmt.setString(2, firstTradedVacation.get("Offer"));
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void approveTrade(String id) {
+        HashMap<String, String> firstTradedVacation = GetVacationDetalies(id);
+        String sql = "UPDATE vacations SET status = ?, UserName = ?"
+                + "  WHERE VacationID = ?";
+        try (Connection conn = SQLiteConnection.Connector();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, "Traded");
+            pstmt.setString(2, firstTradedVacation.get("Interested"));
+            pstmt.setString(3, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try (Connection conn = SQLiteConnection.Connector();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, "Traded");
+            pstmt.setString(2, firstTradedVacation.get("UserName"));
+            pstmt.setString(3, firstTradedVacation.get("Offer"));
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+
 }

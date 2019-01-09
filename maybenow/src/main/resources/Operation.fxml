@@ -5,44 +5,44 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane onMouseEntered="#setWelcomeMessage" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #edc157;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.OperationView">
+<AnchorPane onMouseEntered="#setWelcomeMessage" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #edc157;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.OperationView">
    <children>
-      <Text fx:id="welcome" fill="WHITE" layoutX="154.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello!" textAlignment="CENTER" wrappingWidth="336.7294921875">
+      <Text fx:id="welcome" fill="WHITE" layoutX="132.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello!" textAlignment="CENTER" wrappingWidth="336.7294921875">
          <font>
             <Font size="30.0" />
          </font>
       </Text>
-      <Button fx:id="Logout" layoutX="241.0" layoutY="341.0" mnemonicParsing="false" onAction="#Logout" prefHeight="17.0" prefWidth="162.0" style="-fx-background-color: #d6a900;" text="Logout" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="Logout" layoutX="219.0" layoutY="341.0" mnemonicParsing="false" onAction="#Logout" prefHeight="17.0" prefWidth="162.0" style="-fx-background-color: #d6a900;" text="Logout" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="DeleteAccount" layoutX="45.0" layoutY="230.0" mnemonicParsing="false" onAction="#DeleteAccount" prefHeight="35.0" prefWidth="191.0" style="-fx-background-color: #d6a900;" text="Delete account" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="DeleteAccount" layoutX="65.0" layoutY="230.0" mnemonicParsing="false" onAction="#DeleteAccount" prefHeight="35.0" prefWidth="191.0" style="-fx-background-color: #d6a900;" text="Delete account" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="SearchAccount" layoutX="43.0" layoutY="99.0" mnemonicParsing="false" onAction="#SearchAccount" prefHeight="37.0" prefWidth="191.0" style="-fx-background-color: #d6a900;" text="Search account" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="SearchAccount" layoutX="65.0" layoutY="99.0" mnemonicParsing="false" onAction="#SearchAccount" prefHeight="37.0" prefWidth="191.0" style="-fx-background-color: #d6a900;" text="Search account" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="UpdateAccount" layoutX="45.0" layoutY="163.0" mnemonicParsing="false" onAction="#UpdateAccount" prefHeight="35.0" prefWidth="191.0" style="-fx-background-color: #d6a900;" text="Update account" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="UpdateAccount" layoutX="65.0" layoutY="163.0" mnemonicParsing="false" onAction="#UpdateAccount" prefHeight="35.0" prefWidth="191.0" style="-fx-background-color: #d6a900;" text="Update account" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="AddVacation" layoutX="322.0" layoutY="99.0" mnemonicParsing="false" onAction="#AddVaction" prefHeight="37.0" prefWidth="191.0" style="-fx-background-color: #d6a900;" text="Add Vaction" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="AddVacation" layoutX="349.0" layoutY="99.0" mnemonicParsing="false" onAction="#AddVaction" prefHeight="37.0" prefWidth="191.0" style="-fx-background-color: #d6a900;" text="Add Vaction" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="SearchVacation" layoutX="322.0" layoutY="163.0" mnemonicParsing="false" onAction="#SearchVacation" prefHeight="37.0" prefWidth="191.0" style="-fx-background-color: #d6a900;" text="Search vacation" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="SearchVacation" layoutX="349.0" layoutY="163.0" mnemonicParsing="false" onAction="#SearchVacation" prefHeight="37.0" prefWidth="191.0" style="-fx-background-color: #d6a900;" text="Search vacation" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="Orders" layoutX="322.0" layoutY="230.0" mnemonicParsing="false" onAction="#Orders" prefHeight="35.0" prefWidth="191.0" style="-fx-background-color: #d6a900;" text="Orders" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="Orders" layoutX="349.0" layoutY="230.0" mnemonicParsing="false" onAction="#Orders" prefHeight="35.0" prefWidth="191.0" style="-fx-background-color: #d6a900;" text="Orders" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>

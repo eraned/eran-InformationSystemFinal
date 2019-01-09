@@ -27,7 +27,6 @@ public class UpdateView extends View {
         controller.setScreen(Main.OPERATION_SCREEN);
     }
 
-
     public void init(MouseEvent mouseEvent) {
         controller.getInfo(controller.getCurrentUser());
         userName.setText(controller.getUserInfo().get("username"));

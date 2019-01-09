@@ -13,8 +13,9 @@ public class Main extends Application {
     public static final String OPERATION_SCREEN = "Operation.fxml";
     public static final String SEARCH_SCREEN = "Search.fxml";
     public static final String ADD_vacation = "AddVaction.fxml";
-    public static final String  Search_vacation="SearchVacation.fxml";
-    public static final String  ORDERS_SCREEN="Orders.fxml";
+    public static final String Search_vacation = "SearchVacation.fxml";
+    public static final String ORDERS_SCREEN = "Orders.fxml";
+
     @Override
     public void start(Stage primaryStage) {
         Model model = new Model();
